@@ -20,7 +20,7 @@ then
 	echo "Usage: ./meta.sh alvo.com doc"
 	echo "---------------------------------------------------"
 else
-	lynx --dump "https://google.com/search?&q=site:$target+ext:$file" | grep ".pdf" | cut -d "=" -f2 | egrep -v "site|google" | sed 's/...$//' > urls.temp
+	lynx --dump "https://google.com/search?&q=site:$target+ext:$file" | grep ".$file" | cut -d "=" -f2 | egrep -v "site|google" | sed 's/...$//' > urls.temp
 	for url in $(cat urls.temp); do wget -q $url; done 
 	rm urls.temp
 	exiftool *.$file
